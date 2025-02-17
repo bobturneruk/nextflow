@@ -835,9 +835,8 @@ public class S3FileSystemProvider extends FileSystemProvider implements FileSyst
 		ClientConfiguration clientConfig = createClientConfig(props);
 
 		final String bucketName = S3Path.bucketName(uri);
-		final boolean global = bucketName!=null;
 		final AwsClientFactory factory = new AwsClientFactory(awsConfig, globalRegion(awsConfig));
-		client = new S3Client(factory.getS3Client(clientConfig, global));
+		client = new S3Client(factory.getS3Client(clientConfig, false));
 
 		// set the client acl
 		client.setCannedAcl(getProp(props, "s_3_acl", "s3_acl", "s3Acl"));
